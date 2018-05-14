@@ -1,0 +1,38 @@
+<template>
+    <view class='container'>
+        <view class="bother-title">car 的兄弟组件</view>
+        <view>
+            bother: {{bother}}
+        </view>
+        <view>
+            {{candy}}
+        </view>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy'
+    import {
+        connect
+    } from 'wepy-redux'
+    // @connect({})
+    export default class Carbrother extends wepy.component {
+        data={
+            bother:'你哥哥！',
+            candy:'一颗糖！'
+        }
+        methods={
+            ask(){
+                this.candy = '被要走了'
+            }
+        }
+        onLoad() {
+
+        }
+    }
+</script>
+<style lang='less' scoped>
+    .bother-title{
+        margin-top: 50px;
+    }
+</style>

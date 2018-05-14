@@ -1,0 +1,35 @@
+<!--  -->
+<template>
+    <view>
+        <view>我是car页面</view>
+        <view>{{pageData}}</view>
+        <view>{{postChild}}</view>
+        <caritem :parentMsg="postChild" :syncParentMsg.sync="postChild" :twoWayParentMsg="postChild"></caritem>
+        <carbrother></carbrother>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy'
+    import {
+        connect
+    } from 'wepy-redux'
+    import Caritem from '@/components/caritem'
+    import Carbrother from '@/components/carbrother'
+    export default class Car extends wepy.page {
+        config = {
+            navigationBarTitleText: 'test'
+        };
+        components={
+            caritem:Caritem,
+            carbrother:Carbrother,
+        }
+        data = {
+            pageData:'hellow!!!',
+            postChild:'儿子！',
+        }
+    }
+</script>
+<style lang='less' scoped>
+
+</style>

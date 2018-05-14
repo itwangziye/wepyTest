@@ -1,0 +1,52 @@
+<template>
+    <view class='container'>
+        <view>{{title}}</view>
+        <view>parentMsg: {{parentMsg}}</view>
+        <view>twoWayParentMsg: {{twoWayParentMsg}}</view>
+        <view>syncParentMsg: {{syncParentMsg}}</view>
+        <button @tap="changParent" size="mini">改变父组件属性</button>
+        <button @tap="changChild" size="mini">改变子组件组件属性</button>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy'
+    import {
+        connect
+    } from 'wepy-redux'
+    export default class Caritem extends wepy.component {
+        data = {
+            msg: '这是子组件消息！',
+            title: '我是子组件'
+        };
+        props = {
+            parentMsg: String,
+            syncParentMsg: {
+                type: String,
+                default: '',
+            },
+            twoWayParentMsg: {
+                type: String,
+                default: '',
+                twoWay: true,
+            }
+        }
+        methods = {
+            changParent() {
+                this.twoWayParentMsg = '爸爸'
+                console.log(this.$parent.postChild)
+            },
+            changChild() {
+                this.$parent.postChild = "孙子";
+                this.$parent.$apply();
+                console.log(this.syncParentMsg)
+            }
+        }
+        onLoad() {
+          
+        }
+    }
+</script>
+<style lang='less' scoped>
+
+</style>
